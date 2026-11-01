@@ -1,0 +1,527 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101816">
+  <meta name="description" content="Margin Price is a practical iPhone calculator for business margins, markups, VAT, quantity pricing and discounts.">
+  <title>Margin Price | Business Pricing Calculator</title>
+
+  <style>
+    :root {
+      --background: #101816;
+      --surface: #192420;
+      --surface-light: #20302a;
+      --green: #5ee0a0;
+      --text: #f3f8f5;
+      --muted: #b4c3ba;
+      --border: #34453b;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--background);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont,
+        "Segoe UI", Arial, sans-serif;
+      line-height: 1.7;
+    }
+
+    a {
+      color: var(--green);
+    }
+
+    .container {
+      width: min(1100px, 90%);
+      margin: auto;
+    }
+
+    header {
+      background: #15201b;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      padding: 22px 0;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 21px;
+      font-weight: 750;
+      color: white;
+      text-decoration: none;
+    }
+
+    .brand-icon {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      background: var(--green);
+      color: #102018;
+      border-radius: 12px;
+      font-size: 25px;
+      font-weight: bold;
+    }
+
+    nav a {
+      margin-left: 20px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    nav a:hover {
+      color: var(--green);
+    }
+
+    .hero {
+      text-align: center;
+      padding: 100px 0 90px;
+      background: radial-gradient(
+        ellipse at top,
+        #234734 0%,
+        #101816 65%
+      );
+    }
+
+    .eyebrow {
+      color: var(--green);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    h1 {
+      font-size: clamp(40px, 7vw, 68px);
+      letter-spacing: -2px;
+      line-height: 1.12;
+      margin: 18px 0 24px;
+    }
+
+    h1 span {
+      color: var(--green);
+    }
+
+    .hero p {
+      max-width: 660px;
+      margin: 0 auto 30px;
+      color: var(--muted);
+      font-size: 19px;
+    }
+
+    .status {
+      display: inline-block;
+      padding: 12px 24px;
+      background: var(--surface-light);
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      color: var(--green);
+      font-size: 14px;
+      font-weight: 650;
+    }
+
+    section {
+      padding: 75px 0;
+    }
+
+    h2 {
+      font-size: clamp(28px, 4vw, 38px);
+      line-height: 1.2;
+      margin: 0 0 18px;
+    }
+
+    .section-intro {
+      color: var(--muted);
+      max-width: 700px;
+      margin-bottom: 35px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .feature {
+      padding: 28px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+    }
+
+    .feature-symbol {
+      display: grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--surface-light);
+      color: var(--green);
+      font-size: 23px;
+      font-weight: 700;
+    }
+
+    .feature h3 {
+      margin: 20px 0 10px;
+      font-size: 19px;
+    }
+
+    .feature p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .highlight {
+      background: #15211b;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .highlight-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .example {
+      padding: 30px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      border-radius: 20px;
+    }
+
+    .example-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .example-row:last-child {
+      border: none;
+    }
+
+    .example-row span {
+      color: var(--muted);
+    }
+
+    .example-row strong {
+      font-variant-numeric: tabular-nums;
+    }
+
+    .positive {
+      color: var(--green);
+    }
+
+    .support-box {
+      padding: 35px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: var(--surface);
+    }
+
+    .support-box p {
+      color: var(--muted);
+    }
+
+    .support-box a {
+      overflow-wrap: anywhere;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 30px 0;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    footer a {
+      margin: 0 8px;
+    }
+
+    @media (max-width: 800px) {
+      .features {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .highlight-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 550px) {
+      .features {
+        grid-template-columns: 1fr;
+      }
+
+      nav a {
+        margin-left: 0;
+        margin-right: 15px;
+      }
+
+      .hero {
+        padding: 70px 0;
+      }
+
+      section {
+        padding: 55px 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#">
+        <span class="brand-icon">%</span>
+        Margin Price
+      </a>
+
+      <nav aria-label="Main navigation">
+        <a href="#features">Features</a>
+        <a href="#support">Support</a>
+        <a href="https://jimmas.github.io/JobProof/margin-price-privacy.html">Privacy</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <div class="hero">
+      <div class="container">
+        <div class="eyebrow">
+          Business Pricing Calculator for iPhone
+        </div>
+
+        <h1>
+          Price with confidence.<br>
+          <span>Protect your margin.</span>
+        </h1>
+
+        <p>
+          A straightforward business calculator designed
+          to help you understand margins, markups,
+          selling prices, VAT and the impact of discounts.
+        </p>
+
+        <div class="status">
+          Coming soon to the App Store
+        </div>
+      </div>
+    </div>
+
+    <section id="features">
+      <div class="container">
+        <h2>Everything you need to price smarter</h2>
+
+        <p class="section-intro">
+          Whether you are preparing a quotation,
+          reviewing costs or considering a discount,
+          Margin Price helps you make informed
+          pricing decisions.
+        </p>
+
+        <div class="features">
+
+          <div class="feature">
+            <div class="feature-symbol">%</div>
+            <h3>Margin &amp; Markup</h3>
+            <p>
+              Calculate selling prices, profit margins
+              and markups from your costs.
+            </p>
+          </div>
+
+          <div class="feature">
+            <div class="feature-symbol">£</div>
+            <h3>Reverse Margin</h3>
+            <p>
+              Enter a selling price and cost to see
+              the profit, margin and markup.
+            </p>
+          </div>
+
+          <div class="feature">
+            <div class="feature-symbol">×</div>
+            <h3>Quantity Pricing</h3>
+            <p>
+              Review pricing and profitability
+              across different quantities.
+            </p>
+          </div>
+
+          <div class="feature">
+            <div class="feature-symbol">✓</div>
+            <h3>Minimum Safe Price</h3>
+            <p>
+              Work out the selling price needed
+              to maintain your required margin.
+            </p>
+          </div>
+
+          <div class="feature">
+            <div class="feature-symbol">−</div>
+            <h3>Discount Impact</h3>
+            <p>
+              Understand how a proposed discount
+              affects your profit and margin.
+            </p>
+          </div>
+
+          <div class="feature">
+            <div class="feature-symbol">+</div>
+            <h3>VAT &amp; Saved Calculations</h3>
+            <p>
+              Apply VAT where needed and keep
+              useful calculations for later reference.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="highlight">
+      <div class="container highlight-grid">
+
+        <div>
+          <div class="eyebrow">Clear results</div>
+          <h2>Know your numbers before you quote</h2>
+
+          <p class="section-intro">
+            Margin and markup are not the same thing.
+            Margin Price helps you see the difference,
+            so you can assess profitability before
+            agreeing a selling price.
+          </p>
+
+          <p class="section-intro">
+            Built for small business owners,
+            sales professionals and anyone
+            who regularly works with prices and costs.
+          </p>
+        </div>
+
+        <div class="example">
+          <div class="eyebrow">Illustrative example</div>
+
+          <div class="example-row">
+            <span>Cost</span>
+            <strong>£100.00</strong>
+          </div>
+
+          <div class="example-row">
+            <span>Selling price (ex VAT)</span>
+            <strong>£150.00</strong>
+          </div>
+
+          <div class="example-row">
+            <span>Profit</span>
+            <strong class="positive">£50.00</strong>
+          </div>
+
+          <div class="example-row">
+            <span>Profit margin</span>
+            <strong class="positive">33.33%</strong>
+          </div>
+
+          <div class="example-row">
+            <span>Markup</span>
+            <strong>50.00%</strong>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2>Simple, practical and private</h2>
+
+        <p class="section-intro">
+          Margin Price is designed to be useful
+          without unnecessary complexity.
+          No account is required, and your saved
+          calculations remain on your device.
+        </p>
+      </div>
+    </section>
+
+    <section id="support" class="highlight">
+      <div class="container">
+        <h2>Support &amp; Contact</h2>
+
+        <div class="support-box">
+          <p>
+            Need assistance with Margin Price,
+            or have a suggestion for a future update?
+            Please get in touch.
+          </p>
+
+          <p>
+            <strong>Developer:</strong> Jim Mason
+          </p>
+
+          <p>
+            <strong>Email:</strong>
+            <a href="mailto:jimmason000@btinternet.com">
+              jimmason000@btinternet.com
+            </a>
+          </p>
+
+          <p>
+            <strong>Privacy Policy:</strong>
+            <a href="https://jimmas.github.io/JobProof/margin-price-privacy.html">
+              Read the Margin Price Privacy Policy
+            </a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>
+        &copy; 2026 Jim Mason.
+        Margin Price is an independent iOS application.
+      </p>
+
+      <p>
+        <a href="#features">Features</a>
+        <a href="#support">Support</a>
+        <a href="https://jimmas.github.io/JobProof/margin-price-privacy.html">
+          Privacy Policy
+        </a>
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>
